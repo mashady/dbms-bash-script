@@ -1,18 +1,24 @@
-# Database management system 
+# ⚡ Database management system
+
 Database management system using bash script.
 
-# Main Features 
-1- Create database 
-2- List database 
-3- Connect to database
-4- Delete database
+# Main Features
+
+<ol>
+  <li>Create database</li>
+  <li>List database</li>
+  <li>Connect to database</li>
+  <li>Delete database</li>
+</ol>
 
 # Table Features
-1- Create table 
-2- List tables
-3- Drop tables
-4- Insert row
-5- Show data
-6- Delete row
-7- Update value
 
+<ol>
+  <li>Create table</li>
+  <li>List tables</li>
+  <li>Drop tables</li>
+  <li>Insert row</li>
+  <li>Show data</li>
+  <li>Delete row</li>
+  <li>Update value</li>
+</ol>
