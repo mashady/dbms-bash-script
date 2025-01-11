@@ -2,7 +2,7 @@
 
 Database management system using bash script.
 
-# Main Features
+## Main Features
 
 <ol>
   <li>Create database</li>
@@ -11,7 +11,7 @@ Database management system using bash script.
   <li>Delete database</li>
 </ol>
 
-# Table Features
+## Table Features
 
 <ol>
   <li>Create table</li>
