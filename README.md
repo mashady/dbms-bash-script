@@ -2,6 +2,8 @@
 
 Database management system using bash script.
 
+![project demo](https://github.com/mashady/dbms-bash-script/demo.png)
+
 ## Main Features
 
 <ol>

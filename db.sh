@@ -1,9 +1,7 @@
 #!/bin/bash
 
 DB_PATH="./databases"
-mkdir -p $DB_PATH
-
-
+mkdir -p "$DB_PATH"
 
 function show_menu() {
     echo "=============================="
@@ -15,71 +13,78 @@ function show_menu() {
     echo "4. Delete Database"
     echo "5. Exit"
     read -p "Enter your choice [1-5]: " choice
-    declare -g choice
 }
 
 function create_database() {
     read -p "Enter database name: " dbname
     if [[ $dbname =~ ^[a-zA-Z_][a-zA-Z0-9_]*$ ]]; then
         if [[ -d "$DB_PATH/$dbname" ]]; then
-        echo "Database '$dbname' already exists."
-    else
-        mkdir "$DB_PATH/$dbname"
-        echo "Database '$dbname' created."
-    fi
+            echo "Database '$dbname' already exists."
+        else
+            mkdir "$DB_PATH/$dbname"
+            echo "Database '$dbname' created."
+        fi
     else
         echo "Invalid database name."
     fi
 }
 
-function list_database(){
-    echo "Available Databases:"
-    ls $DB_PATH
+function list_database() {
+    if [[ -z "$(ls -A "$DB_PATH")" ]]; then
+        echo "No databases available."
+    else
+        echo "Available Databases:"
+        ls "$DB_PATH"
+    fi
 }
 
 function connect_database() {
     read -p "Enter database name to connect: " dbname
     if [[ -d "$DB_PATH/$dbname" ]]; then
         echo "Connecting to database $dbname..."
-        if [[ -x "./table" ]]; then
-            ./table "$DB_PATH/$dbname"
+        if [[ -x "./table.sh" ]]; then
+            echo "Table script found. Running it now..."
+            echo "$DB_PATH/$dbname"
+            echo $DB_PATH/$dbname
+            ./table.sh "$DB_PATH/$dbname"
         else
             echo "Error: 'table' script not found or not executable."
+            echo "Make sure 'table' exists in the same directory as 'db' and is executable."
+        fi
+    else
+        echo "Database '$dbname' does not exist."
+    fi
+}
+
+
+function delete_database() {
+    read -p "Enter database name to delete: " dbname
+    if [[ -d "$DB_PATH/$dbname" ]]; then
+        read -p "Are you sure you want to delete $dbname? (y/n): " confirm
+        if [[ $confirm =~ ^[yY]$ ]]; then
+            rm -r "$DB_PATH/$dbname"
+            echo "Database '$dbname' deleted."
+        else
+            echo "Operation cancelled."
         fi
     else
         echo "Database does not exist."
     fi
 }
 
-function delete_database(){
-    read -p "Enter database name to delete: " dbname
-    if [[ -d "$DB_PATH/$dbname" ]]; then
-        read -p "Are you sure you want to delete $dbname? (y/n): " confirm
-        if [[ $confirm == "y" || $confirm == "Y" ]]; then
-        rm -r "$DB_PATH/$dbname"
-        echo "Database '$dbname' deleted."
-    else
-        echo "Operation cancelled."
-    fi
-    else
-        echo "Database does not exist."
-    fi
-}
-
-function exit (){
+function exit_system() {
     echo "Exiting Database Management System. Goodbye!"
     exit 0
 }
 
-
 while true; do
     show_menu
     case $choice in
-        1)create_database;;
-        2)list_database;;
-        3)connect_database;;
-        4)delete_database;;
-        5)exit;;
-        *)echo "Invalid choice. Please try again.";;
+        1) create_database ;;
+        2) list_database ;;
+        3) connect_database ;;
+        4) delete_database ;;
+        5) exit_system ;;
+        *) echo "Invalid choice. Please try again." ;;
     esac
 done
