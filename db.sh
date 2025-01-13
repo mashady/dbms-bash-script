@@ -77,14 +77,4 @@ function exit_system() {
     exit 0
 }
 
-while true; do
-    show_menu
-    case $choice in
-        1) create_database ;;
-        2) list_database ;;
-        3) connect_database ;;
-        4) delete_database ;;
-        5) exit_system ;;
-        *) echo "Invalid choice. Please try again." ;;
-    esac
-done
+
