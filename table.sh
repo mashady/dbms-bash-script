@@ -77,6 +77,7 @@ function insert_row() {
             read -p "Enter value for column '$col': " value
             values+="$value,"
         done
+        #it remove the last , from values
         values=${values%,}
 
         echo "$values" >> "$DB_PATH/$table.data"
